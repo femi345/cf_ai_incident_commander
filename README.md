@@ -84,6 +84,10 @@ Most incident management tools are passive dashboards. This project flips the mo
 - **Broadcasting** — real-time notifications to all connected clients
 - **Assets** — SPA hosting with worker-first routing for agent endpoints
 
+## Live Demo
+
+**https://cf-ai-incident-commander.femiwxyz.workers.dev**
+
 ## Running Locally
 
 ### Prerequisites
