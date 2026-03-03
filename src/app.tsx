@@ -801,7 +801,7 @@ function Dashboard() {
               </div>
               <Badge variant="secondary">
                 <BrainIcon size={12} weight="bold" className="mr-1" />
-                Llama 3.3
+                Llama 4 Scout
               </Badge>
             </div>
             <div className="flex items-center gap-3">

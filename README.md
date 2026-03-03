@@ -62,7 +62,7 @@ Most incident management tools are passive dashboards. This project flips the mo
 
 | Component | Technology |
 |-----------|-----------|
-| LLM | Llama 3.3 70B (`@cf/meta/llama-3.3-70b-instruct-fp8-fast`) on Workers AI |
+| LLM | Llama 4 Scout (`@cf/meta/llama-4-scout-17b-16e-instruct`) for chat + Llama 3.3 70B for background triage, on Workers AI |
 | Agent Runtime | Cloudflare Durable Objects via Agents SDK |
 | State | Synced agent state + embedded SQLite (3 tables) |
 | Coordination | Task queues (async triage) + scheduled tasks (health checks) |

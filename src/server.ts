@@ -317,7 +317,7 @@ Respond in this exact format:
       : "\n\nNo active incidents right now.";
 
     const result = streamText({
-      model: workersai("@cf/meta/llama-3.3-70b-instruct-fp8-fast"),
+      model: workersai("@cf/meta/llama-4-scout-17b-16e-instruct"),
       system: `You are an AI Incident Response Commander. You help DevOps teams manage, triage, and resolve production incidents efficiently.
 
 Your capabilities:
