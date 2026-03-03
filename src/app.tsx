@@ -97,6 +97,22 @@ const SEVERITY_DOTS: Record<string, string> = {
   P4: "text-blue-500"
 };
 
+function sanitizeModelText(text: string): string {
+  // Strip leaked JSON tool calls that some models output as text.
+  // Matches patterns like {"name":"toolName","parameters":{...}}
+  // or {"type":"function","name":...} that should never appear in chat.
+  let cleaned = text.replace(
+    /\{[\s]*"(?:name|type)"[\s]*:[\s]*"(?:function|[a-zA-Z]+)"[\s]*,[\s]*"(?:parameters|name|function)"[\s]*:[\s]*\{[^}]*\}[\s]*\}/g,
+    ""
+  );
+  // Also catch standalone JSON blocks that look like tool invocations
+  cleaned = cleaned.replace(
+    /\{[\s]*"(?:type|name)"[\s]*:[\s]*"function"[^}]*\}/g,
+    ""
+  );
+  return cleaned.trim();
+}
+
 function timeAgo(dateStr: string): string {
   const now = new Date();
   const date = new Date(dateStr);
@@ -944,8 +960,10 @@ function Dashboard() {
                   {message.parts
                     .filter((part) => part.type === "text")
                     .map((part, i) => {
-                      const text = (part as { type: "text"; text: string })
+                      const rawText = (part as { type: "text"; text: string })
                         .text;
+                      if (!rawText) return null;
+                      const text = isUser ? rawText : sanitizeModelText(rawText);
                       if (!text) return null;
 
                       if (isUser) {

@@ -318,7 +318,14 @@ Respond in this exact format:
 
     const result = streamText({
       model: workersai("@cf/meta/llama-4-scout-17b-16e-instruct"),
+      toolChoice: "auto",
       system: `You are an AI Incident Response Commander. You help DevOps teams manage, triage, and resolve production incidents efficiently.
+
+CRITICAL RULES:
+- You have tools available. When you need to perform an action, call the appropriate tool. NEVER write out JSON, function calls, or tool invocations as text. The system handles tool execution automatically.
+- NEVER include raw JSON objects, {"name":...}, {"type":"function"...}, or any structured data meant for tool calls in your text responses.
+- Respond to users in plain language with markdown formatting. Describe what you will do, then use the tool silently.
+- If a user reports a problem, use the declareIncident tool. Do NOT write out the parameters as text.
 
 Your capabilities:
 - Declare new incidents (requires human approval for safety)
